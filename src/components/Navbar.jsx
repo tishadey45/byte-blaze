@@ -1,4 +1,27 @@
+import { useEffect, useState } from "react";
+
 const Navbar = () => {
+  const [theme, setTheme] = useState("light");
+//   console.log(theme);
+  
+  const handleToggle = (e) => {
+    // console.log(e.target.checked);
+    if (e.target.checked) {
+       setTheme("dark")      
+    } else {
+        setTheme("light")
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem("theme",theme)
+    const themeData = localStorage.getItem("theme")
+    // console.log(themeData);
+    document.querySelector("html").setAttribute("data-theme",themeData)
+
+
+  }, [theme])
+  
+
   return (
     <div>
       <div className="navbar bg-base-100 shadow-lg px-4 fixed z-10">
@@ -22,6 +45,7 @@ const Navbar = () => {
           </ul>
           <label className="toggle text-base-content">
             <input
+              onChange={handleToggle}
               type="checkbox"
               value="synthwave"
               className="theme-controller"
