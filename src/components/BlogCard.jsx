@@ -1,29 +1,32 @@
 import { Link } from "react-router-dom";
+import placeHolderImage from "../assets/404.jpg";
 
 const BlogCard = ({ blogData }) => {
+  const { cover_image, title, published_timestamp, description, id } = blogData;
+
   console.log(blogData);
   return (
-    <div className="border border-b-fuchsia-700">
+    
       <Link
-        to="/"
-        className="max-w-sm mx-auto group bg-white rounded-lg  shadow hover:shadow-lg transition"
+        to={`/blog-data/${id}`}
+        className="max-w-sm mx-auto group border-2 hover:scale-105 border-primary hover:border-secondary border-opacity-30 hover:no-underline focus:no-underline  rounded-lg  shadow hover:shadow-lg transition"
       >
         <img
           className="object-cover w-full rounded-t h-44"
-          src={blogData?.cover_image}
+          src={cover_image || placeHolderImage}
         />
 
         <div className="p-6 space-y-2">
           <h3 className="text-2xl font-semibold group-hover:underline">
-            {blogData?.title}
+            {title}
           </h3>
           <span className="text-xs text-gray-500">
-            {new Date(blogData?.published_timestamp).toLocaleTimeString()}
+            {new Date(published_timestamp).toLocaleTimeString()}
           </span>
-          <p className="text-gray-600">{blogData?.description}</p>
+          <p className="text-gray-600">{description}</p>
         </div>
       </Link>
-    </div>
+    
   );
 };
 
