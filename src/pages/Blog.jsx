@@ -1,4 +1,6 @@
 import { useLoaderData } from "react-router-dom";
+import Content from "../components/Content";
+import Author from "../components/Author";
 
 const Blog = () => {
   const blog = useLoaderData();
@@ -11,6 +13,7 @@ const Blog = () => {
     published_timestamp,
     tags,
     cover_image,
+     profile_image,
   } = blog;
 
   return (
@@ -57,51 +60,7 @@ const Blog = () => {
               defaultChecked
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <div>
-                {/* Tags */}
-                <div className="flex flex-wrap py-6 gap-2">
-                  <img
-                    src={cover_image}
-                    alt=""
-                    className="object-cover w-full h-64 rounded-t lg:rounded-l lg:rounded-t-none sm:h-96 lg:col-span-7"
-                  />
-
-                  {tags.map((tag) => (
-                    <a
-                      key={tag}
-                      href="#"
-                      className="px-3 py-1 rounded-sm hover:underline"
-                    >
-                      #{tag}
-                    </a>
-                  ))}
-                </div>
-
-                {/* Title */}
-                <h1 className="text-2xl font-bold">{title}</h1>
-
-                {/* Related */}
-                <div className="space-y-2 mt-4">
-                  <h4 className="text-lg font-semibold">Related posts</h4>
-                  <ul className="ml-4 space-y-1 list-disc">
-                    <li>
-                      <a href="#" className="hover:underline">
-                        Nunc id magna mollis
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline">
-                        Duis molestie, neque eget pretium
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline">
-                        Mauris nec urna volutpat
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+               <Content blog={blog}/>
             </div>
 
             {/* Author Tab */}
@@ -112,9 +71,9 @@ const Blog = () => {
               aria-label="Author"
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <h2 className="text-xl font-semibold">Author Info</h2>
-              <p>This section will show author details.</p>
+              <Author blog={blog}/>
             </div>
+            {/* <MdBookmarkAdd /> */}
           </div>
         </article>
       </div>
