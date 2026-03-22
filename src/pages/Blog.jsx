@@ -1,7 +1,8 @@
+import { MdBookmarkAdd } from "react-icons/md";
 import { useLoaderData } from "react-router-dom";
-import Content from "../components/Content";
 import Author from "../components/Author";
-
+import Content from "../components/Content";
+import { saveBlog } from "../utils";
 const Blog = () => {
   const blog = useLoaderData();
 
@@ -13,8 +14,13 @@ const Blog = () => {
     published_timestamp,
     tags,
     cover_image,
-     profile_image,
+    profile_image,
   } = blog;
+
+  const handleBookmark = (blog) => {
+    // console.log(blog);
+    saveBlog(blog);
+  };
 
   return (
     <div>
@@ -60,7 +66,7 @@ const Blog = () => {
               defaultChecked
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-               <Content blog={blog}/>
+              <Content blog={blog} />
             </div>
 
             {/* Author Tab */}
@@ -71,9 +77,14 @@ const Blog = () => {
               aria-label="Author"
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <Author blog={blog}/>
+              <Author blog={blog} />
             </div>
-            {/* <MdBookmarkAdd /> */}
+            <div
+              onClick={() => handleBookmark(blog)}
+              className="bg-primary p-3 ml-5 rounded-full hover:bg-opacity-30 bg-opacity-20 cursor-pointer hover:scale-105 overflow-hidden"
+            >
+              <MdBookmarkAdd size={20} className="text-secondary" />
+            </div>
           </div>
         </article>
       </div>
